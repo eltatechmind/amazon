@@ -10,7 +10,13 @@ end
 gem 'rails', '~> 5.1.6'
 gem 'bcrypt',         '3.1.12'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+group :development, :test do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+end
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
