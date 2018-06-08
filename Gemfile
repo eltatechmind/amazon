@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.5.1"
 
 gem 'rails',        '5.1.4'
 gem 'bcrypt',       '3.1.12'
