@@ -25,4 +25,5 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_template 'users/tempo'
     assert is_logged_in?
   end
+
 end
