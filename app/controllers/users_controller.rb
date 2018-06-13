@@ -36,7 +36,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
+      if current_user.admin? && !current_user?(@user)
+        redirect_to users_path
+      else  
       redirect_to @user
+      end
     else
       render 'edit'
     end
@@ -68,8 +72,10 @@ class UsersController < ApplicationController
 
   # Confirms the correct user.
   def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    unless current_user.admin?
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
   end
 
   # Confirms an admin user.
