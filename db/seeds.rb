@@ -12,6 +12,8 @@ User.create!(name:  "Ahmed Fouad",
              activated: true,
              activated_at: Time.zone.now)
 
+Category.create!(name: "Electronics")
+
 99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
