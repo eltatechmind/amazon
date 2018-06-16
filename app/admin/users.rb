@@ -13,10 +13,4 @@ ActiveAdmin.register User do
 #   permitted
 # end
 
-index do
-  selectable_column
-  column :name
-  column "My Custom Title", :name
-end
-
 end
