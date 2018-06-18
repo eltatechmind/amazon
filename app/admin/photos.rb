@@ -11,7 +11,7 @@ ActiveAdmin.register Photo do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-permit_params :image
+permit_params :image, :item_id
   
   index do
     selectable_column
@@ -23,6 +23,7 @@ permit_params :image
   end
 
   form do |f|
+    f.input :item_id
     f.inputs "Upload" do
       f.input :image, required: true, as: :file
     end

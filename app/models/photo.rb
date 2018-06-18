@@ -6,5 +6,5 @@ class Photo < ApplicationRecord
     validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
 	validates_uniqueness_of :image_file_name # this is a standard ActiveRecord validator
     #validates_attachment_file_name :image, :matches => [/_\d+_\d+_\d+\.bin$/]
-    
+    belongs_to :item
 end

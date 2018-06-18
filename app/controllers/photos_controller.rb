@@ -41,7 +41,7 @@ class PhotosController < ApplicationController
 	# Be sure to update your create() and update() controller methods.
 
 	def photo_params
-	  params.require(:photo).permit(:image)
+	  params.require(:photo).permit(:image, :item_id)
 	end
 
 end
