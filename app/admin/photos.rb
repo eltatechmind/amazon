@@ -16,6 +16,7 @@ permit_params :image, :item_id
   index do
     selectable_column
     id_column
+    column :item_id
     column 'Image', sortable: :image_file_name do |photo| link_to photo.image_file_name, photo.image.url end
     column :image_file_size, sortable: :image_file_size do |photo| "#{photo.image_file_size / 1024} KB" end
     column :created_at
