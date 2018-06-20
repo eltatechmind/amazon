@@ -3,6 +3,7 @@ User.create!(name:  "Ahmed Mohamed Fouad",
              password:              "12345678",
              password_confirmation: "12345678",
              gender: "male",
+             birthday: "1960-08-04",
              activated: true,
              activated_at: Time.zone.now)
 
@@ -11,6 +12,7 @@ User.create!(name:  "Ahmed Fouad",
              password:              "12345678",
              password_confirmation: "12345678",
              gender: "male",
+             birthday: "1960-08-04",
              activated: true,
              activated_at: Time.zone.now)
 
@@ -25,6 +27,7 @@ Category.create!(name: "Electronics")
                password:              password,
                password_confirmation: password,
                gender: "male",
+               birthday: "1960-08-04",
                activated: true,
                activated_at: Time.zone.now)
 end
