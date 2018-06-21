@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180621082031) do
+ActiveRecord::Schema.define(version: 20180621090018) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -71,6 +71,28 @@ ActiveRecord::Schema.define(version: 20180621082031) do
     t.index ["category_id"], name: "index_items_on_category_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_id"
+    t.integer "item_id"
+    t.index ["item_id"], name: "index_order_items_on_item_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "state_id"
+    t.integer "address_id"
+    t.integer "user_id"
+    t.index ["address_id"], name: "index_orders_on_address_id"
+    t.index ["state_id"], name: "index_orders_on_state_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "phones", force: :cascade do |t|
     t.integer "number"
     t.datetime "created_at", null: false
@@ -88,6 +110,12 @@ ActiveRecord::Schema.define(version: 20180621082031) do
     t.datetime "image_updated_at"
     t.integer "item_id"
     t.index ["item_id"], name: "index_photos_on_item_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "order_state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
