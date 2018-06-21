@@ -6,6 +6,7 @@ gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'activeadmin', '~> 1.3'
 gem "paperclip", "~> 6.0.0"
 gem 'bootstrap-sass', '3.3.7'
+gem 'country_select'
 gem 'bcrypt',       '3.1.12'
 gem 'faker',          '1.7.3'
 gem 'puma',         '3.9.1'
