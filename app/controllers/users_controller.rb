@@ -2,6 +2,30 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [ :cart, :index, :edit, :update, :show, :destroy]
   before_action :correct_user,   only: [ :edit, :update, :show, :destroy]
 
+  def addorder
+    user = current_user
+    state = State.where(order_state: "Cart").first
+    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
+    if order.nil?
+      render body: nil, status: :error
+      return
+    else
+      oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1", order.id)
+      if oi.nil?
+        render body: nil, status: :error
+        return
+      else
+        state2 = State.where(order_state: "Order").first
+        order.state_id = state2.id
+        order.save
+        render body: nil, status: :ok
+        return
+      end  
+    end
+  end
+
+
+
   def addcart
     #byebug
     user = current_user
@@ -58,7 +82,23 @@ class UsersController < ApplicationController
     user = current_user
     state = State.where(order_state: "Cart").first
     order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id ).first
-    @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id)
+    if !order.nil?
+      @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id)
+    else
+      @oi = nil
+    end
+
+  end
+
+  def order
+    user = current_user
+    state = State.where(order_state: "Order").first
+    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id ).first
+    if !order.nil?
+      @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id)
+    else
+      @oi = nil
+    end
   end
 
   def index

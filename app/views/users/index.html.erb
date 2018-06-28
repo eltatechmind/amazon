@@ -5,7 +5,6 @@
   <ul>
       <h3> Category: <%= cate.name %> </h3>
       <% cate.items.each do |item| %>
-        <div class = "addo" id = "<%= item.id%>" >
           <li>
              Name: <%= item.name %> <br>
              Description: <%= item.desc %> <br>
@@ -13,10 +12,11 @@
              Price: <%= item.price %> <br>
              <% item.photos.each do |photo| %>
                 <%= image_tag photo.image.url(:medium) %>
-              <% end %>
+             <% end %>
+          <div class = "addo" id = "<%= item.id%>" >
              <button class="addcart">Add To Cart</button>
-          </li>
-        </div>
+          </div>
+          </li> 
       <% end %>
   </ul>   
   <% end %>

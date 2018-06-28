@@ -1,10 +1,10 @@
 
 <% provide(:title, "My Cart") %>
-<h1>My cart</h1>
-
+<h1>My Cart</h1>
+<% if !@oi.nil? %>
   <ul>
+     <% totalprice = 0 %>
      <% @oi.each do |order_item| %>
-        <div class="removeitemparent" id="<%= order_item.item.id %>">
           <li>
             Item Name: <%= order_item.item.name %> <br>
             Description: <%= order_item.item.desc %> <br>
@@ -14,9 +14,16 @@
               <% order_item.item.photos.each do |photo| %>
                 <%= image_tag photo.image.url(:medium) %>
               <% end %>
+          <div class="removeitemparent" id="<%= order_item.item.id %>">
               <button class="removeitem">Remove From Cart</button>
-          </li>
-        </div>  
+          </div>
+          <% totalprice = totalprice + (order_item.item.price* order_item.quantity) %> 
+          </li> 
      <% end %>
-  </ul>   
+  </ul>
+  
+  <h3> total price: <%= totalprice %> </h3>
+  <button class="makeorder">Make Order</button>
+  
+<% end %>
   

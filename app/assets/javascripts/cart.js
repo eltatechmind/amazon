@@ -45,6 +45,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 
+    $('.makeorder').on('click', function() {
+        var x = "http://localhost:3000/addorder";
+        //alert(x)
+        $.ajax({
+            type: "POST",
+            url: x,
+            success: function(data) {
+                alert("Order Created");
+                location.reload();
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
+
+
 
 
 
