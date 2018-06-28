@@ -53,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             url: x,
             success: function(data) {
                 alert("Order Created");
-                location.reload();
+                $(location).attr('href', 'http://localhost:3000/order');
+                //location.reload();
             },
             error: function() {
                 alert("Error");

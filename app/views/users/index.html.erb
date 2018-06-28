@@ -13,9 +13,11 @@
              <% item.photos.each do |photo| %>
                 <%= image_tag photo.image.url(:medium) %>
              <% end %>
+          <% if logged_in? %>   
           <div class = "addo" id = "<%= item.id%>" >
              <button class="addcart">Add To Cart</button>
           </div>
+          <% end %>
           </li> 
       <% end %>
   </ul>   

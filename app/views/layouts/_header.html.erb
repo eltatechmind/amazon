@@ -4,7 +4,7 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Hot Items",   '#' %></li>
-        <li><%= link_to "Categories",   '/categories' %></li>
+        <li><%= link_to "Categories",   'http://localhost:3000/categories' %></li>
         <li><%= link_to "Home", root_path %></li>
         <% if logged_in? %>
           <li class="dropdown">
@@ -14,9 +14,8 @@
             <ul class="dropdown-menu">
               <li><%= link_to "Profile", current_user %></li>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-              <li><%= link_to "Orders", '#' %></li>
-              <li><%= link_to "Cart", '#' %></li>
-              <li><%= link_to "Favorites", '#' %></li>
+              <li><%= link_to "Orders", '/order' %></li>
+              <li><%= link_to "Cart", '/cart' %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "Log out", logout_path, method: :delete %>
