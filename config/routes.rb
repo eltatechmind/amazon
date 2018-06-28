@@ -4,11 +4,15 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   root 'users#tempo'
+  post '/addcart', to: 'users#addcart'
+  get '/emptycart', to: 'users#emptycart'
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'	
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+  get '/categories', to: 'users#index'
+  get '/cart', to: 'users#cart'
   resources :users
   resources :photos
   resources :categories

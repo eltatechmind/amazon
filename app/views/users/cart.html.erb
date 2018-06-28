@@ -1,0 +1,24 @@
+
+<% provide(:title, "My Cart") %>
+<h1>My cart</h1>
+  <% @orders.each do |order| %>
+  <ul>
+     <% order.order_items.each do |order_item| %>
+          <li>
+            Item Name: <%= order_item.item.name %> <br>
+            Description: <%= order_item.item.desc %> <br>
+            Price: <%= order_item.item.price %> <br>
+            Quantity: <%= order_item.quantity %> <br>
+            Category: <%= order_item.item.category.name %> <br>
+              <% order_item.item.photos.each do |photo| %>
+                <%= image_tag photo.image.url(:medium) %>
+              <% end %>
+          </li>
+     <% end %>
+  </ul>   
+  <% end %>
+  <div class="emptycart" id="<%=%>">
+    <button id="empty">Empty Cart</button>
+  </div>  
+
+  <button id="myBtn">Try it</button>

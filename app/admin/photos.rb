@@ -14,6 +14,8 @@ permit_params :image, :item_id
 
   form do |f|
 
+    #f.input :item_id, label: 'Item', 
+     #     as: :select, collection: -> { Photo.pluck(:item_id, :id) }
 
     f.input :item_id
     f.inputs "Upload" do
