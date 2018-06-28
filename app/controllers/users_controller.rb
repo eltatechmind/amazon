@@ -5,22 +5,20 @@ class UsersController < ApplicationController
   def addcart
     #byebug
     user = current_user
+    state = State.where(order_state: "Cart").first
+    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
     item = Item.find(params[:item_id])
     if item.nil? || item.units == 0
-      respond_to do |format|
-        format.json {head :error}
-      end
+      render body: nil, status: :error
       return
     end
  
-    state = State.where(order_state: "Cart").first
-    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
-    oi = OrderItem.where("order_items.order_id = ? AND order_items.item_id = ?", order.id, item.id).first
  
     if order.nil?
       order = Order.create!(user_id: user.id, state_id: state.id)
       order.order_items.create(order_id: order.id, item_id: item.id, quantity: 1, active: 1)
     else
+      oi = OrderItem.where("order_items.order_id = ? AND order_items.item_id = ? AND order_items.active = 1", order.id, item.id).first
       if !oi.nil?
       oi[:quantity] += 1
       oi.save
@@ -28,29 +26,39 @@ class UsersController < ApplicationController
       orderitem = order.order_items.create(order_id: order.id, item_id: item.id, quantity: 1, active: 1)
       end
     end
-    respond_to do |format|
-      format.json {head :ok}
-    end
+    render body: nil, status: :ok
   end 
 
-  def emptycart
-    @user = User.find(params[:id])
+  def removecart
+    user = current_user
     state = State.where(order_state: "Cart").first
-    order = Order.where("orders.user_id = ? AND orders.state_id = ?", @user.id, state.id).first
-    orderitems = order.order_items
-    orderitems.each do |oi|
-      oi.active = 0
+    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
+    item = Item.find(params[:item_id])
+    if item.nil? || order.nil?
+      render body: nil, status: :error
+      return
     end
-    order.state_id = 5
+    oi = OrderItem.where("order_items.order_id = ? AND order_items.item_id = ? AND order_items.active = 1", order.id, item.id).first
+    if oi.nil?
+      render body: nil, status: :error
+      return
+    end
+    oi.active = 0
+    oi.save
+    render body: nil, status: :ok
   end
+
+
+
 
   def tempo
   end
 
   def cart
-    @user = current_user
+    user = current_user
     state = State.where(order_state: "Cart").first
-    @orders = Order.where("orders.user_id = ? AND orders.state_id = ?", @user.id, state.id )
+    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id ).first
+    @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id)
   end
 
   def index

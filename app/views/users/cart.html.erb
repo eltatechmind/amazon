@@ -1,9 +1,10 @@
 
 <% provide(:title, "My Cart") %>
 <h1>My cart</h1>
-  <% @orders.each do |order| %>
+
   <ul>
-     <% order.order_items.each do |order_item| %>
+     <% @oi.each do |order_item| %>
+        <div class="removeitemparent" id="<%= order_item.item.id %>">
           <li>
             Item Name: <%= order_item.item.name %> <br>
             Description: <%= order_item.item.desc %> <br>
@@ -13,12 +14,9 @@
               <% order_item.item.photos.each do |photo| %>
                 <%= image_tag photo.image.url(:medium) %>
               <% end %>
+              <button class="removeitem">Remove From Cart</button>
           </li>
+        </div>  
      <% end %>
   </ul>   
-  <% end %>
-  <div class="emptycart" id="<%=%>">
-    <button id="empty">Empty Cart</button>
-  </div>  
-
-  <button id="myBtn">Try it</button>
+  

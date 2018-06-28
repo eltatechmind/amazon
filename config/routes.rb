@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root 'users#tempo'
   post '/addcart', to: 'users#addcart'
-  get '/emptycart', to: 'users#emptycart'
+  post '/removecart', to: 'users#removecart'
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'	
   get    '/login',   to: 'sessions#new'
