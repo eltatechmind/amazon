@@ -62,6 +62,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
         });
     });
 
+    $('.cancelorder').on('click', function() {
+        var x = "http://localhost:3000/cancelorder";
+        //alert(x)
+        $.ajax({
+            type: "POST",
+            url: x,
+            success: function(data) {
+                alert("Order Canceled");
+                $(location).attr('href', 'http://localhost:3000/order');
+                //location.reload();
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
+
 
 
 

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/addcart', to: 'users#addcart'
   post '/removecart', to: 'users#removecart'
   post '/addorder', to: 'users#addorder'
+  post 'cancelorder', to: 'users#cancelorder'
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'	
   get    '/login',   to: 'sessions#new'

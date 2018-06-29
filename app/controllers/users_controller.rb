@@ -2,6 +2,36 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [ :cart, :edit, :update, :show, :destroy, :order, :cart]
   before_action :correct_user,   only: [ :edit, :update, :show, :destroy]
 
+  def cancelorder
+    user = current_user
+    state = State.where(order_state: "Order").first
+    state2 = State.where(order_state: "Order_cancelled").first
+    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
+    if !order.nil?
+      oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1", order.id)
+      if !oi.nil?
+        totalprice = 0
+        oi.each do |order_item|
+          totalprice = totalprice + (order_item.item.price* order_item.quantity)
+        end
+        user.balance = user.balance + totalprice
+        user.save
+        order.state_id = state2.id
+        order.save
+        render body: nil, status: :ok
+        return
+      else
+        render body: nil, status: :error
+        return
+      end
+
+    else
+      render body: nil, status: :error
+      return
+    end
+  end
+
+
   def addorder
     user = current_user
     address = Address.where("addresses.user_id = ?", user.id).first
