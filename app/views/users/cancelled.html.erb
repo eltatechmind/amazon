@@ -1,12 +1,12 @@
 
-<% provide(:title, "Active Order") %>
-<h1>Current Active Orders</h1>
+<% provide(:title, "Cancelled Order") %>
+<h1>Cancelled Orders</h1>
 <% if !@order.nil? %>
   <% @order.each do |order| %>
     <% @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id) %>
 
       <% if !@oi.nil? %>
-      <h2> Order ID:<%= order.id %> | Creation Date: <%=order.created_at%></h2>
+      <h2> Order ID:<%= order.id %> | Cancel Date: <%=order.created_at%></h2>
         <ul>
            <% totalprice = 0 %>
            <% @oi.each do |order_item| %>
@@ -24,7 +24,7 @@
            <% end %>
            <p><strong> Order Total Price: <%=totalprice%></strong></p>
         </ul> 
-        <button class="cancelorder btn btn-primary">Cancel Order</button>  
+        <!--<button class="cancelorder btn btn-primary">Cancel Order</button>  -->
       <% end %>
 
   <% end %>

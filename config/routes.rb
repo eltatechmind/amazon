@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get '/categories', to: 'users#index'
   get '/cart', to: 'users#cart'
   get '/order', to: 'users#order'
+  get '/cancelled', to: 'users#cancelled'
+  get '/completed', to: 'users#completed'
   resources :users
   resources :photos
   resources :categories

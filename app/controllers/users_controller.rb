@@ -1,6 +1,20 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [ :cart, :edit, :update, :show, :destroy, :order, :cart]
+  before_action :logged_in_user, only: [ :cart, :edit, :update, :show, :destroy, :order, :cart, :cancelled, :completed]
   before_action :correct_user,   only: [ :edit, :update, :show, :destroy]
+
+  def cancelled
+    user = current_user
+    state = State.where(order_state: "Order_cancelled").first
+    @order = Order.where("orders.user_id = ? AND orders.state_id = ? ", user.id, state.id )
+    @order = @order.order('updated_at DESC')
+  end
+
+  def completed
+    user = current_user
+    state = State.where(order_state: "Order_completed").first
+    @order = Order.where("orders.user_id = ? AND orders.state_id = ? ", user.id, state.id )
+    @order = @order.order('updated_at DESC')
+  end
 
   def cancelorder
     user = current_user
@@ -12,7 +26,10 @@ class UsersController < ApplicationController
       if !oi.nil?
         totalprice = 0
         oi.each do |order_item|
-          totalprice = totalprice + (order_item.item.price* order_item.quantity)
+          item = Item.where("items.id = ?", order_item.item_id).first
+          totalprice = totalprice + (item.price * order_item.quantity)
+          item.units = item.units + order_item.quantity
+          item.save
         end
         user.balance = user.balance + totalprice
         user.save
@@ -45,11 +62,21 @@ class UsersController < ApplicationController
       totalprice = 0
       oi.each do |order_item|
         totalprice = totalprice + (order_item.item.price* order_item.quantity)
+        item = Item.where("items.id = ?", order_item.item_id).first
+        if order_item.quantity > item.units
+          render body: nil, status: :error
+          return
+        end
       end
       if oi.nil? || totalprice > user.balance
         render body: nil, status: :error
         return
       else
+        oi.each do |order_item|
+          item = Item.where("items.id = ?", order_item.item_id).first
+          item.units = item.units - order_item.quantity
+          item.save
+        end  
         user.balance = user.balance - totalprice
         user.save
         state2 = State.where(order_state: "Order").first
