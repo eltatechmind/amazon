@@ -4,7 +4,7 @@
 <% if !@oi.nil? %>
   <ul>
      <% totalprice = 0 %>
-     <% @oi.each do |order_item| %>
+      <% @oi.each do |order_item| %>
           <li>
             Item Name: <%= order_item.item.name %> <br>
             Description: <%= order_item.item.desc %> <br>
@@ -15,15 +15,17 @@
                 <%= image_tag photo.image.url(:medium) %>
               <% end %>
           <div class="removeitemparent" id="<%= order_item.item.id %>">
-              <button class="removeitem">Remove From Cart</button>
+              <button class="removeitem btn btn-primary">Remove From Cart</button>
           </div>
           <% totalprice = totalprice + (order_item.item.price* order_item.quantity) %> 
           </li> 
-     <% end %>
+      <% end %>
+    <% if !@oi.first.nil? %>  
+    <h3> total price: <%= totalprice %> </h3>
+    <button class="makeorder btn btn-primary">Make Order</button>
+    <% end %>
   </ul>
-  
-  <h3> total price: <%= totalprice %> </h3>
-  <button class="makeorder">Make Order</button>
+
   
 <% end %>
   

@@ -1,20 +1,31 @@
 
 <% provide(:title, "My Order") %>
-<h1>Current Order</h1>
-<% if !@oi.nil? %>
-  <ul>
-     <% @oi.each do |order_item| %>
-          <li>
-            Item Name: <%= order_item.item.name %> <br>
-            Description: <%= order_item.item.desc %> <br>
-            Price: <%= order_item.item.price %> <br>
-            Quantity: <%= order_item.quantity %> <br>
-            Category: <%= order_item.item.category.name %> <br>
-              <% order_item.item.photos.each do |photo| %>
-                <%= image_tag photo.image.url(:medium) %>
-              <% end %>
-          </li>
-     <% end %>
-  </ul> 
-  <button class="cancelorder">Cancel Order</button>  
-<% end %>
+<h1>Current Active Orders</h1>
+<% if !@order.nil? %>
+  <% @order.each do |order| %>
+    <% @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id) %>
+
+      <% if !@oi.nil? %>
+      <h2> Order ID:<%= order.id %></h2>
+        <ul>
+           <% totalprice = 0 %>
+           <% @oi.each do |order_item| %>
+                <li>
+                  Item Name: <%= order_item.item.name %> <br>
+                  Description: <%= order_item.item.desc %> <br>
+                  Price: <%= order_item.item.price %> <br>
+                  Quantity: <%= order_item.quantity %> <br>
+                  Category: <%= order_item.item.category.name %> <br>
+                    <% order_item.item.photos.each do |photo| %>
+                      <%= image_tag photo.image.url(:medium) %>
+                    <% end %>
+                  <% totalprice = totalprice + (order_item.item.price*order_item.quantity) %>
+                </li>
+           <% end %>
+           <p><strong> Order Total Price: <%=totalprice%></strong></p>
+        </ul> 
+        <button class="cancelorder btn btn-primary">Cancel Order</button>  
+      <% end %>
+
+  <% end %>
+<% end %> 

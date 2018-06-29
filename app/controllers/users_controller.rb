@@ -119,9 +119,9 @@ class UsersController < ApplicationController
   def cart
     @user = current_user
     state = State.where(order_state: "Cart").first
-    order = Order.where("orders.user_id = ? AND orders.state_id = ?", @user.id, state.id ).first
-    if !order.nil?
-      @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id)
+    @order = Order.where("orders.user_id = ? AND orders.state_id = ?", @user.id, state.id ).first
+    if !@order.nil?
+      @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",@order.id)
     else
       @oi = nil
     end
@@ -131,12 +131,8 @@ class UsersController < ApplicationController
   def order
     user = current_user
     state = State.where(order_state: "Order").first
-    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id ).first
-    if !order.nil?
-      @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id)
-    else
-      @oi = nil
-    end
+    @order = Order.where("orders.user_id = ? AND orders.state_id = ? ", user.id, state.id )
+    @order = @order.order('created_at DESC')
   end
 
   def index
