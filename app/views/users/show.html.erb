@@ -17,4 +17,27 @@
       <p>Balance: &dollar;<%= @user.balance %></p>
     </section>
   </aside>
+  <p><strong> My Addresses </strong></p>
+  <aside class="col-md-4">
+      <% countr = 1 %>
+      <% @address.each do |addr| %>
+        <p> address #<%=countr%> </p>
+        <ul>
+          <li>Address: <%=addr.address %> </li>
+          <li>State Or Province: <%=addr.state_or_province %> </li>
+          <li>City: <%=addr.city %> </li>
+          <li>Country: <%=addr.contry %> </li>
+          <div class="editaddrparent" id="<%= addr.id %>">
+              <button class="editaddr btn btn-primary">Edit Address</button>
+          </div>
+          <div class="removeaddrparent" id="<%= addr.id %>">
+              <button class="removeaddr btn btn-primary">Delete Address</button>
+          </div>
+        </ul>
+        <% countr+=1 %>
+      <% end %>
+    <a href="http://localhost:3000/createaddress">
+      <button class="addaddress btn btn-primary">Add New Address</button>
+    </a>
+  </aside>
 </div>

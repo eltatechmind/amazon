@@ -1,6 +1,6 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "Amazon", root_path, id: "logo" %>
+    <%= link_to "Amazon", categories_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Hot Items",   '#' %></li>
@@ -24,7 +24,7 @@
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "Sign up", root_path %></li>
+          <li><%= link_to "Sign up", signup_path %></li>
           <li><%= link_to "Login", login_path %></li>
         <% end %>
       </ul>
