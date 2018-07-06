@@ -12,6 +12,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
         $(location).attr('href', x);
     });
 
+
+    $('.orderaddress.btn.btn-primary').on('click', function() {
+        var item_div = $(this).parents('.orderaddressparent');
+        var item_id = item_div.attr('id');
+        var x = "http://localhost:3000/addorder?id=" + item_id;
+
+        $.ajax({
+            type: "POST",
+            url: x,
+            success: function(data) {
+                alert("Order Created");
+                $(location).attr('href', 'http://localhost:3000/order');
+            },
+            error: function() {
+                alert("Error");
+            }
+        });
+    });
+
+
+
     $('.addcart.btn.btn-primary').on('click', function() {
         var item_div = $(this).parents('.addo');
         var item_id = item_div.attr('id');
@@ -53,20 +74,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
     $('.makeorder.btn.btn-primary').on('click', function() {
-        var x = "http://localhost:3000/addorder";
-        //alert(x)
-        $.ajax({
-            type: "POST",
-            url: x,
-            success: function(data) {
-                alert("Order Created");
-                $(location).attr('href', 'http://localhost:3000/order');
-                //location.reload();
-            },
-            error: function() {
-                alert("Error");
-            }
-        });
+
+        $(location).attr('href', 'http://localhost:3000/chooseaddress');
     });
 
     $('.cancelorder.btn.btn-primary').on('click', function() {

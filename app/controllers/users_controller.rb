@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
   def addorder
     user = current_user
-    address = Address.where("addresses.user_id = ?", user.id).first
+    address = Address.find(params[:id])
     state = State.where(order_state: "Cart").first
     order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
     if order.nil? || address.nil?

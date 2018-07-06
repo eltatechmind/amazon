@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get  '/createaddress', to: 'addresses#new'
   post '/createaddress', to: 'addresses#create'
   post '/deleteaddress', to: 'addresses#delete'
+  get '/chooseaddress', to: 'addresses#choose'
 
   resources :users
   resources :photos

@@ -33,6 +33,11 @@ class AddressesController < ApplicationController
     end
   end
 
+  def choose
+    @user = current_user
+    @address = @user.addresses.all
+  end
+
 
   def delete
     @address = Address.find(params[:id])

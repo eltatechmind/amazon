@@ -1,0 +1,20 @@
+<% provide(:title, 'Choose Address') %>
+<h1>Choose Address For Your Order</h1>
+<% if !@address.nil? %>
+  <ul>
+      <% @address.each do |addr| %>
+          <li>
+            Address: <%= addr.address %> <br>
+            State Or Province: <%= addr.state_or_province %> <br>
+            City: <%= addr.city %> <br>
+            Country: <%= addr.contry %> <br>
+          <div class="orderaddressparent" id="<%= addr.id %>">
+              <button class="orderaddress btn btn-primary">Choose This Address</button>
+          </div>
+          </li> 
+      <% end %>
+  </ul>
+<% else %>
+  <p> please add address first so that we can proceed your order </p>
+<% end %>
+  
