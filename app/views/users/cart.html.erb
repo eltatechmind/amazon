@@ -1,7 +1,10 @@
 
 <% provide(:title, "My Cart") %>
 <h1>My Cart</h1>
+<p class="successr alert alert-success" style="display: none;"> Success! Item Removed </p>
+<p class="errorl alert alert-danger" style="display: none;"> Error! </p>
 <% if !@oi.nil? %>
+
   <ul>
      <% totalprice = 0 %>
       <% @oi.each do |order_item| %>
@@ -24,6 +27,7 @@
     <h3> total price: <%= totalprice %> </h3>
     <button class="makeorder btn btn-primary">Make Order</button>
     <% end %>
+    <p class="successl alert alert-success" style="display: none;"> Success! redirecting to order address page </p>
   </ul>
 
   

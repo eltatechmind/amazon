@@ -1,3 +1,9 @@
+States.create!(order_state: "Order");
+States.create!(order_state: "Cart");
+States.create!(order_state: "Order_cancelled");
+States.create!(order_state: "Order_completed");
+
+
 User.create!(name:  "Ahmed Mohamed Fouad",
              email: "ahmedfouad2020era@gmail.com",
              password:              "12345678",

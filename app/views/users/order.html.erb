@@ -1,6 +1,8 @@
 
 <% provide(:title, "Active Order") %>
 <h1>Current Active Orders</h1>
+<p class="successl alert alert-success" style="display: none;"> Success! Order Cancelled & Money got Refunded. </p>
+<p class="errorl alert alert-danger" style="display: none;"> Error! </p>
 <% if !@order.nil? %>
   <% @order.each do |order| %>
     <% @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id) %>

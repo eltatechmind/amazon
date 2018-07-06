@@ -1,5 +1,9 @@
 <% provide(:title, 'Choose Address') %>
 <h1>Choose Address For Your Order</h1>
+
+<p class="successl alert alert-success" style="display: none;"> Success!, wait 5 Seconds being redirect to the order page! </p>
+<p class="errorl alert alert-danger" style="display: none;"> Error! </p>
+
 <% if !@address.nil? %>
   <ul>
       <% @address.each do |addr| %>

@@ -22,11 +22,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
             type: "POST",
             url: x,
             success: function(data) {
-                alert("Order Created");
+                $(".successl").show(0).delay(4000).hide(0);
+                setTimeout(function () {
                 $(location).attr('href', 'http://localhost:3000/order');
+                }, 5000);
+
             },
             error: function() {
-                alert("Error");
+                $(".errorl").show(0).delay(2000).hide(0); 
             }
         });
     });
@@ -42,10 +45,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             type: "POST",
             url: x,
             success: function(data) {
-                alert("Added To Cart");
+                $(".successl").show(0).delay(1000).hide(0);
             },
             error: function() {
-                alert("Error");
+                $(".errorl").show(0).delay(1000).hide(0);
             }
         });
     });
@@ -57,16 +60,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var item_div = $(this).parents('.removeitemparent');
         var item_id = item_div.attr('id');
         var x = "http://localhost:3000/removecart?item_id=" + item_id;
-        //alert(x)
         $.ajax({
             type: "POST",
             url: x,
             success: function(data) {
-                alert("Item Removed From Cart");
-                location.reload();
+                $(".successr").show(0).delay(1000).hide(0);   
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
             },
             error: function() {
-                alert("Error");
+                $(".errorl").show(0).delay(2000).hide(0);
             }
         });
     });
@@ -75,22 +79,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     $('.makeorder.btn.btn-primary').on('click', function() {
 
+        $(".successl").show(0).delay(2000).hide(0);
+        setTimeout(function () {
         $(location).attr('href', 'http://localhost:3000/chooseaddress');
+        }, 2000);
+        
     });
 
     $('.cancelorder.btn.btn-primary').on('click', function() {
         var x = "http://localhost:3000/cancelorder";
-        //alert(x)
         $.ajax({
             type: "POST",
             url: x,
             success: function(data) {
-                alert("Order Canceled");
-                $(location).attr('href', 'http://localhost:3000/order');
-                //location.reload();
+                $(".successl").show(0).delay(2000).hide(0);
+                setTimeout(function () {
+                location.reload();
+                }, 2000);    
             },
             error: function() {
-                alert("Error");
+                $(".errorl").show(0).delay(2000).hide(0); 
             }
         });
     });
@@ -106,11 +114,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
             type: "POST",
             url: x,
             success: function(data) {
-                alert("Address Deleted");
-                location.reload();
+                $(".successr").show(0).delay(1000).hide(0);   
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
             },
             error: function() {
-                alert("Error");
+                 $(".errorl").show(0).delay(2000).hide(0); 
             }
         });
     });
