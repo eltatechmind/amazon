@@ -4,7 +4,7 @@
 <p class="successl alert alert-success" style="display: none;"> Success!, wait 5 Seconds being redirect to the order page! </p>
 <p class="errorl alert alert-danger" style="display: none;"> Error! </p>
 
-<% if !@address.nil? %>
+<% if !@address.empty? %>
   <ul>
       <% @address.each do |addr| %>
           <li>
@@ -18,7 +18,8 @@
           </li> 
       <% end %>
   </ul>
+
 <% else %>
-  <p> please add address first so that we can proceed your order </p>
+  <h2> please add address first so that we can proceed your order </h2>
 <% end %>
   
