@@ -14,7 +14,7 @@ class AddressesController < ApplicationController
       flash[:success] = "Address Added Successfully"
       redirect_to current_user
     else
-      render 'newaddress'
+      render 'new'
     end
   end
 
