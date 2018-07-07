@@ -4,11 +4,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     var xhttp = new XMLHttpRequest();
 
-
+    //edit address
     $('.editaddr.btn.btn-primary').on('click', function() {
         var item_div = $(this).parents('.editaddrparent');
         var item_id = item_div.attr('id');
-        var x = "http://localhost:3000/addresses/" + item_id + "/edit";
+        var x = "../addresses/" + item_id + "/edit";
         $(location).attr('href', x);
     });
 
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     $('.orderaddress.btn.btn-primary').on('click', function() {
         var item_div = $(this).parents('.orderaddressparent');
         var item_id = item_div.attr('id');
-        var x = "http://localhost:3000/addorder?id=" + item_id;
+        var x = "../addorder?id=" + item_id;
 
         $.ajax({
             type: "POST",
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             success: function(data) {
                 $(".successl").show(0).delay(4000).hide(0);
                 setTimeout(function () {
-                $(location).attr('href', 'http://localhost:3000/order');
+                $(location).attr('href', '../order');
                 }, 5000);
 
             },
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     $('.addcart.btn.btn-primary').on('click', function() {
         var item_div = $(this).parents('.addo');
         var item_id = item_div.attr('id');
-        var x = "http://localhost:3000/addcart?item_id=" + item_id;
+        var x = "../addcart?item_id=" + item_id;
 
         $.ajax({
             type: "POST",
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     $('.removeitem.btn.btn-primary').on('click', function() {
         var item_div = $(this).parents('.removeitemparent');
         var item_id = item_div.attr('id');
-        var x = "http://localhost:3000/removecart?item_id=" + item_id;
+        var x = "../removecart?item_id=" + item_id;
         $.ajax({
             type: "POST",
             url: x,
@@ -81,13 +81,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         $(".successl").show(0).delay(2000).hide(0);
         setTimeout(function () {
-        $(location).attr('href', 'http://localhost:3000/chooseaddress');
+        $(location).attr('href', '../chooseaddress');
         }, 2000);
         
     });
 
     $('.cancelorder.btn.btn-primary').on('click', function() {
-        var x = "http://localhost:3000/cancelorder";
+        var x = "../cancelorder";
         $.ajax({
             type: "POST",
             url: x,
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     $('.removeaddr.btn.btn-primary').on('click', function() {
         var item_div = $(this).parents('.removeaddrparent');
         var item_id = item_div.attr('id');
-        var x = "http://localhost:3000/deleteaddress?id=" + item_id;
+        var x = "../deleteaddress?id=" + item_id;
         $.ajax({
             type: "POST",
             url: x,
