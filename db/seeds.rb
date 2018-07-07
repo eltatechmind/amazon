@@ -1,7 +1,7 @@
-#States.create!(order_state: "Order")
-#States.create!(order_state: "Cart")
-#States.create!(order_state: "Order_cancelled")
-#States.create!(order_state: "Order_completed")
+States.create!(order_state: "Order")
+States.create!(order_state: "Cart")
+States.create!(order_state: "Order_cancelled")
+States.create!(order_state: "Order_completed")
 
 
 User.create!(name:  "Ahmed Mohamed Fouad",
