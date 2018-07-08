@@ -87,7 +87,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
     $('.cancelorder.btn.btn-primary').on('click', function() {
-        var x = "../cancelorder";
+        var item_div = $(this).parents('.cancelorderparent');
+        var item_id = item_div.attr('id');
+        var x = "../cancelorder?id="+ item_id;
         $.ajax({
             type: "POST",
             url: x,

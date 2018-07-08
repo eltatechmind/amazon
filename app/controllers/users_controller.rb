@@ -1,29 +1,29 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [ :cart, :edit, :update, :show, :destroy, :order, :cart, :cancelled, :completed, :newaddress, :createaddress]
+  before_action :logged_in_user, only: [ :cart, :edit, :update, :show, :destroy
+    , :order, :cart, :cancelled, :completed, :cancelorder, :removecart, :addcart, :addorder]
   before_action :correct_user,   only: [ :edit, :update, :show, :destroy]
 
 
-
+# display user's Cancelled Orders
   def cancelled
     user = current_user
     state = State.where(order_state: "Order_cancelled").first
     @order = Order.where("orders.user_id = ? AND orders.state_id = ? ", user.id, state.id )
     @order = @order.order('updated_at DESC')
   end
-
+# display user's completed Orders
   def completed
     user = current_user
     state = State.where(order_state: "Order_completed").first
     @order = Order.where("orders.user_id = ? AND orders.state_id = ? ", user.id, state.id )
     @order = @order.order('updated_at DESC')
   end
-
+# cancel one of user orders by pressing on a button using jquery and ajax requests
   def cancelorder
     user = current_user
-    state = State.where(order_state: "Order").first
     state2 = State.where(order_state: "Order_cancelled").first
-    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
-    if !order.nil?
+    order = Order.find(params[:id])
+    if !order.nil? && order.user_id == user.id
       oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1", order.id)
       if !oi.nil?
         totalprice = 0
@@ -50,13 +50,13 @@ class UsersController < ApplicationController
     end
   end
 
-
+# get the address using button jquery & ajax request, then change the cart into an order and add the address to it
   def addorder
     user = current_user
     address = Address.find(params[:id])
     state = State.where(order_state: "Cart").first
     order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
-    if order.nil? || address.nil?
+    if order.nil? || address.nil? || address.user_id != user.id
       render body: nil, status: :error
       return
     else
@@ -91,10 +91,9 @@ class UsersController < ApplicationController
     end
   end
 
-
+# add an item to a cart when press on a button using jquery and ajax request
 
   def addcart
-    #byebug
     user = current_user
     state = State.where(order_state: "Cart").first
     order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
@@ -120,12 +119,14 @@ class UsersController < ApplicationController
     render body: nil, status: :ok
   end 
 
+# remove an item from a cart when pressing on a button using jquery and ajax request
+
   def removecart
     user = current_user
     state = State.where(order_state: "Cart").first
     order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
     item = Item.find(params[:item_id])
-    if item.nil? || order.nil?
+    if item.nil? || order.nil? 
       render body: nil, status: :error
       return
     end
@@ -138,12 +139,8 @@ class UsersController < ApplicationController
     oi.save
     render body: nil, status: :ok
   end
-
-
-
-
-  def tempo
-  end
+ 
+# display cart items on page cart 
 
   def cart
     @user = current_user
@@ -157,6 +154,8 @@ class UsersController < ApplicationController
 
   end
 
+# display order items on page order
+
   def order
     user = current_user
     state = State.where(order_state: "Order").first
@@ -164,24 +163,27 @@ class UsersController < ApplicationController
     @order = @order.order('created_at DESC')
   end
 
+# display products with their categories on page categories
+
   def index
     @user = current_user
     @categories = Category.all
-
-    #@user = @current_user
-    #@categories = Category.all
-    #@items = Item.all
-    #@photos = Photo.all
   end
+
+# display the user logged in profile, with their info, addresses, balance, etc
 
   def show
     @user = User.find(params[:id])
     @address = @user.addresses.where("addresses.user_id= ?", @user.id)
   end
+
+# a page for registering a new user
   
   def new
   	@user = User.new
   end
+
+# create a new user
 
   def create
     @user = User.new(user_params)
@@ -194,9 +196,13 @@ class UsersController < ApplicationController
     end
   end
 
+# a page for editing user info
+
   def edit
     @user = User.find(params[:id])
   end
+
+# update user's info
 
   def update
     @user = User.find(params[:id])
@@ -208,6 +214,8 @@ class UsersController < ApplicationController
     end
   end
 
+# a destroy function (needed to be revised and secured)
+
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
@@ -216,12 +224,12 @@ class UsersController < ApplicationController
 
   private
 
+# allow those to be edited via params sent in requests
+
   def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation, :gender, :birthday)
   end
-
-
 
   # Before filters
 

@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :delete]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :delete, :choose]
   before_action :correct_address,   only: [ :edit, :update, :delete]
 
   def new
@@ -48,6 +48,12 @@ class AddressesController < ApplicationController
       render body: nil, status: :error
     end
   end
+
+
+
+  private
+
+  
 
   def address_params
       params.require(:address).permit(:user_id, :address, :city, :state_or_province, :contry)

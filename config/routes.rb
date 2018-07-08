@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  root 'users#tempo'
+  root 'users#index'
   post '/addcart', to: 'users#addcart'
   post '/removecart', to: 'users#removecart'
   post '/addorder', to: 'users#addorder'
@@ -35,3 +35,4 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
