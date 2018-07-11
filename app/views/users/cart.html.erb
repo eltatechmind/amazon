@@ -1,7 +1,8 @@
 
 <% provide(:title, "My Cart") %>
+
 <div class="jumbotron">
-<h1 style= "color:black; font-weight: bold; text-decoration: underline">My Cart</h1>
+<h1 class = "hdhd">My Cart</h1>
 
 <% if !@oi.nil? %>
 
@@ -27,14 +28,19 @@
       <% end %>
     <% if !@oi.first.nil? %>  
     <h2 class="list-group-item beda" style= "color:red; font-weight: bold; text-decoration: underline; border: 2px dashed black;" > total price: &dollar;<%= totalprice %> </h2>
-    <div style= "text-align: center; margin-top: 4px;">
-    <button class="makeorder btn btn-primary">Choose Address</button>
-    </div>
+    <% if !@user.addresses.first.nil? %> 
+      <div style= "text-align: center; margin-top: 4px;">
+        <button class="gotoaddress btn btn-primary">Choose Address</button>
+      </div>
+      <p class="successl alert alert-success" style="display: none;"> Redirecting to choosing address </p>
+    <% else %>
+      <div style= "text-align: center; margin-top: 4px;">
+      <button class="addaddress btn btn-primary">Add Address First</button>
+      </div>
+      <p class="successp alert alert-success" style="display: none;"> Redirecting to add address </p>
     <% end %>
-    <p class="successl alert alert-success" style="display: none;"> Redirecting to choosing address </p>
+    <% end %>
   </ul>
-
-  
 <% end %>
 </div>
   

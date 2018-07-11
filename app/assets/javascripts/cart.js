@@ -77,11 +77,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 
-    $('.makeorder.btn.btn-primary').on('click', function() {
+    $('.gotoaddress.btn.btn-primary').on('click', function() {
 
         $(".successl").show(0).delay(2000).hide(0);
         setTimeout(function () {
         $(location).attr('href', '../chooseaddress');
+        }, 2000);
+        
+    });
+
+    $('.addaddress.btn.btn-primary').on('click', function() {
+
+        $(".successp").show(0).delay(2000).hide(0);
+        setTimeout(function () {
+        $(location).attr('href', '../createaddress');
         }, 2000);
         
     });

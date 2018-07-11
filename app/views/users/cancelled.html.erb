@@ -1,12 +1,12 @@
 <div class="jumbotron">
 <% provide(:title, "Cancelled Order") %>
-<h1 style= "color:black; font-weight: bold; text-decoration: underline">Cancelled Orders</h1>
+<h1 class = "hdhd">Cancelled Orders</h1>
 <% if !@order.nil? %>
   <% @order.each do |order| %>
     <% @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id) %>
 
       <% if !@oi.nil? %>
-      <h2 style= "color:black; font-weight: bold; text-decoration: underline; margin-bottom: 10px; margin-top: 60px;"> Order ID:<%= order.id %> | Cancel Date: <%=order.created_at%></h2>
+      <h2 class = "hdhd" style= "margin-bottom: 10px; margin-top: 60px;"> Order ID:<%= order.id %> | Cancel Date: <%=order.updated_at%></h2>
         <ul class="list-group">
            <% totalprice = 0 %>
            <% @oi.each do |order_item| %>

@@ -1,14 +1,12 @@
 <% provide(:title, 'Choose Address') %>
 <div class="jumbotron">
-<h2 style= "color:black; font-weight: bold; text-decoration: underline">Choose Address For Your Order</h2>
-
-
+<h2 class = "hdhd">Choose Address For Your Order</h2>
 
 <% if !@address.empty? %>
   <ul class="list-group">
     <% countr = 1 %>
       <% @address.each do |addr| %>
-          <p style= "color:black; font-weight: bold; text-decoration: underline">Address #<%=countr%></p>
+          <p class = "hdhd">Address #<%=countr%></p>
           <li class="list-group-item beda">
             <span style= "color:DarkBlue; font-weight: bold;">Address: </span><span style= "color:Brown; font-weight: bold;"><%= addr.address %></span> <br>
             <span style= "color:DarkBlue; font-weight: bold;">State Or Province: </span><span style= "color:Brown; font-weight: bold;"><%= addr.state_or_province %></span> <br>

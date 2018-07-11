@@ -1,13 +1,13 @@
 
 <% provide(:title, "Active Order") %>
 <div class="jumbotron">
-<h1 style= "color:black; font-weight: bold; text-decoration: underline">Current Active Orders</h1>
+<h1 class = "hdhd">Current Active Orders</h1>
 <% if !@order.nil? %>
   <% @order.each do |order| %>
     <% @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id) %>
 
       <% if !@oi.nil? %>
-      <h3 style= "color:black; font-weight: bold; text-decoration: underline"> Order ID:<%= order.id %> | Creation Date: <%=order.created_at%></h3>
+      <h2 class = "hdhd" style= "margin-bottom: 10px; margin-top: 60px;">Order ID:<%= order.id %> | Creation Date: <%=order.created_at%></h2>
         <div  class="list-group-item beda">
         <ul class="list-group">
            <% totalprice = 0 %>
@@ -24,7 +24,7 @@
                   <% totalprice = totalprice + (order_item.item.price*order_item.quantity) %>
                 </li>
            <% end %>
-           <p style= "color:black; font-weight: bold; text-decoration: underline">Order Total Price: &dollar;<%=totalprice%></p>
+           <p class = "hdhd">Order Total Price: &dollar;<%=totalprice%></p>
         </ul> 
         <div class = "cancelorderparent" id = "<%=order.id%>">
         <button class="cancelorder btn btn-primary">Cancel Order</button>  

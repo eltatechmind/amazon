@@ -1,11 +1,11 @@
 <% provide(:title, "Categories & Items") %>
 <div class="jumbotron">
-<h1 style= "color:black; font-weight: bold; text-decoration: underline">Categories & Items</h1>
+<h1 class= "hdhd">Categories & Items</h1>
 
 
   <% @categories.each do |cate| %>
   <ul class="list-group">
-      <h3 style= "color:black; font-weight: bold; text-decoration: underline"><%= cate.name %> </h3>
+      <h3 class = "hdhd"><%= cate.name %> </h3>
       <% cate.items.each do |item| %>
           <li class="list-group-item beda">
              <span style= "color:DarkBlue; font-weight: bold;">Name: </span><span style= "color:Brown; font-weight: bold;"><%= item.name %></span> <br>
