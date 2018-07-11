@@ -12,6 +12,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
         $(location).attr('href', x);
     });
 
+    $('.editphone.btn.btn-primary').on('click', function() {
+        var item_div = $(this).parents('.editphoneparent');
+        var item_id = item_div.attr('id');
+        var x = "../phones/" + item_id + "/edit";
+        $(location).attr('href', x);
+    });
+
 
     $('.orderaddress.btn.btn-primary').on('click', function() {
         var item_div = $(this).parents('.orderaddressparent');
@@ -136,6 +143,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
         });
     });
 
+
+    $('.removephone.btn.btn-primary').on('click', function() {
+        var item_div = $(this).parents('.removephoneparent');
+        var item_id = item_div.attr('id');
+        var x = "../deletephone?id=" + item_id;
+        $.ajax({
+            type: "POST",
+            url: x,
+            success: function(data) {
+                $(".successa"+ item_id).show(0).delay(1000).hide(0);   
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            },
+            error: function() {
+                 $(".errorb"+ item_id).show(0).delay(2000).hide(0); 
+            }
+        });
+    });
 
 
 

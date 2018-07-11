@@ -38,15 +38,87 @@
           </span>
             <p class="successr<%= addr.id %> alert alert-success" style="display: none;"> Success! Address deleted. </p>
             <p class="errorl<%= addr.id %> alert alert-danger" style="display: none;"> Error! </p>
-          </div> 
-        </ul>
+        </ul>    
+        </div> 
+        
         <br>
         <% countr+=1 %>
       <% end %>
     
     <a href="../createaddress">
-      <button class="addaddress btn btn-primary"">Add New Address</button>
+      <button class="btn btn-primary"">Add New Address</button>
     </a>
   </aside>
+
+
+  <aside class="col-md-4" style="margin-top:3.5px;">
+      <p class = "hdhd">My Phone Numbers</p>
+      <% countr = 1 %>
+      <% @phone.each do |phone| %>
+
+        <div class= "list-group-item beda">
+        <p style= "color:gold; font-weight: bold;"> Phone #<%=countr%> </p>
+        <ul class="list-group">
+          <li class="list-group-item beda"><span style= "color:green; font-weight: bold;">Phone Number: </span><span class="badge badge-primary badge-pill" style="float:none"> <%=phone.number %> </span></li>
+
+          <span class="editphoneparent" id="<%= phone.id %>">
+              <button class="editphone btn btn-primary">Edit Phone</button>
+          </span>
+          <span class="removephoneparent" id="<%= phone.id %>" style= "float:right;">
+              <button class="removephone btn btn-primary">Delete Phone</button>
+          </span>
+            <p class="successa<%= phone.id %> alert alert-success" style="display: none;"> Success! Phone deleted. </p>
+            <p class="errorb<%= phone.id %> alert alert-danger" style="display: none;"> Error! </p>
+        </div> 
+        </ul>
+        <br>
+        <% countr+=1 %>
+    <% end %>
+    
+    <a href="../createphone">
+      <button class="btn btn-primary"">Add New phone</button>
+    </a>
+
+  </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 </div>

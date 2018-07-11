@@ -29,7 +29,7 @@ class AddressesController < ApplicationController
       flash[:success] = "Address edited"
       redirect_to current_user
     else
-      render 'editaddress'
+      render 'edit'
     end
   end
 
@@ -70,7 +70,7 @@ class AddressesController < ApplicationController
     end
   end
 
-  # Confirms the correct address.
+  # Confirms the address belongs to the current user.
   def correct_address
       @user = current_user
       @address = Address.find(params[:id])

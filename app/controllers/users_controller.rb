@@ -182,6 +182,7 @@ end
   def show
     @user = User.find(params[:id])
     @address = @user.addresses.where("addresses.user_id= ?", @user.id)
+    @phone = @user.phones.where("phones.user_id= ?", @user.id)
   end
 
 # a page for registering a new user

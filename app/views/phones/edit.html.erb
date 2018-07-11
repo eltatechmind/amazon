@@ -1,0 +1,15 @@
+<% provide(:title, 'Edit Phone') %>
+<h1>Edit Phone</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@phone) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :number %>
+      <%= f.text_field :number, class: 'form-control' %>
+
+      <%= f.submit "Edit Phone", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+

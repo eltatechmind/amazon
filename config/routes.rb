@@ -26,12 +26,17 @@ Rails.application.routes.draw do
   post '/deleteaddress', to: 'addresses#delete'
   get '/chooseaddress', to: 'addresses#choose'
 
+  get  '/createphone', to: 'phones#new'
+  post '/createphone', to: 'phones#create'
+  post '/deletephone', to: 'phones#delete'
+
   resources :users
   resources :photos
   resources :categories
   resources :items
   resources :account_activations, only: [:edit]
   resources :addresses
+  resources :phones
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
