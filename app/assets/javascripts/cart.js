@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             type: "POST",
             url: x,
             success: function(data) {
-                $(".successl"+ item_id ).show(0).delay(4000).hide(0);
+                $(".successl"+ item_id ).show(0).delay(6000).hide(0);
                 setTimeout(function () {
                 $(location).attr('href', '../order');
-                }, 5000);
+                }, 7000);
 
             },
             error: function() {
