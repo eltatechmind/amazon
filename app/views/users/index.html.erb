@@ -1,27 +1,32 @@
 <% provide(:title, "Categories & Items") %>
-<h1>Categories & Items</h1>
-<p class="successl alert alert-success" style="display: none;"> Success! item added to cart </p>
-<p class="errorl alert alert-danger" style="display: none;"> Error! </p>
+<div class="jumbotron">
+<h1 style= "color:black; font-weight: bold; text-decoration: underline">Categories & Items</h1>
+
 
   <% @categories.each do |cate| %>
-  <ul>
-      <h3> Category: <%= cate.name %> </h3>
+  <ul class="list-group">
+      <h3 style= "color:black; font-weight: bold; text-decoration: underline"><%= cate.name %> </h3>
       <% cate.items.each do |item| %>
-          <li>
-             Name: <%= item.name %> <br>
-             Description: <%= item.desc %> <br>
-             Units: <%= item.units %> <br> 
-             Price: <%= item.price %> <br>
+          <li class="list-group-item beda">
+             <span style= "color:DarkBlue; font-weight: bold;">Name: </span><span style= "color:Brown; font-weight: bold;"><%= item.name %></span> <br>
+             <span style= "color:DarkBlue; font-weight: bold;">Description: </span><span style= "color:Brown; font-weight: bold;"><%= item.desc %></span> <br>
+             <span style= "color:DarkBlue; font-weight: bold;">Units: </span><span class="badge badge-primary badge-pill" style="float:none"><%= item.units %></span><br> 
+             <span style= "color:DarkBlue; font-weight: bold;">Price: </span><span class="badge badge-primary badge-pill" style="float:none">&dollar;<%= item.price %></span> <br><br>
              <% item.photos.each do |photo| %>
-                <%= image_tag photo.image.url(:medium) %>
+                <%= image_tag photo.image.url(:medium), :style => "border: 2px dashed black" %>
              <% end %>
           <% if logged_in? %>   
-          <div class = "addo" id = "<%= item.id%>" >
+          <div class = "addo" id = "<%=item.id%>" >
+             <br>
              <button class="addcart btn btn-primary">Add To Cart</button>
           </div>
+          <p class="successl<%=item.id%> alert alert-success" style="display: none;"> Success! item added to cart </p>
+          <p class="errorl<%=item.id%> alert alert-danger" style="display: none;"> Error! </p>
           <% end %>
+          <br>
           </li> 
       <% end %>
+      <br><br>
   </ul>   
   <% end %>
-
+</div>

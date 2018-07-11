@@ -22,14 +22,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
             type: "POST",
             url: x,
             success: function(data) {
-                $(".successl").show(0).delay(4000).hide(0);
+                $(".successl"+ item_id ).show(0).delay(4000).hide(0);
                 setTimeout(function () {
                 $(location).attr('href', '../order');
                 }, 5000);
 
             },
             error: function() {
-                $(".errorl").show(0).delay(2000).hide(0); 
+                $(".errorl"+ item_id ).show(0).delay(2000).hide(0); 
             }
         });
     });
@@ -45,10 +45,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             type: "POST",
             url: x,
             success: function(data) {
-                $(".successl").show(0).delay(1000).hide(0);
+                $(".successl"+item_id).show(0).delay(1000).hide(0);
             },
             error: function() {
-                $(".errorl").show(0).delay(1000).hide(0);
+                $(".errorl"+item_id).show(0).delay(1000).hide(0);
             }
         });
     });
@@ -64,13 +64,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
             type: "POST",
             url: x,
             success: function(data) {
-                $(".successr").show(0).delay(1000).hide(0);   
+                $(".successr"+item_id).show(0).delay(1000).hide(0);   
                 setTimeout(function () {
                     location.reload();
                 }, 1000);
             },
             error: function() {
-                $(".errorl").show(0).delay(2000).hide(0);
+                $(".errorl"+item_id).show(0).delay(2000).hide(0);
             }
         });
     });
@@ -94,13 +94,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
             type: "POST",
             url: x,
             success: function(data) {
-                $(".successl").show(0).delay(2000).hide(0);
+                $(".successl"+item_id).show(0).delay(2000).hide(0);
                 setTimeout(function () {
                 location.reload();
                 }, 2000);    
             },
             error: function() {
-                $(".errorl").show(0).delay(2000).hide(0); 
+                $(".errorl"+item_id).show(0).delay(2000).hide(0); 
             }
         });
     });
@@ -116,13 +116,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
             type: "POST",
             url: x,
             success: function(data) {
-                $(".successr").show(0).delay(1000).hide(0);   
+                $(".successr"+ item_id).show(0).delay(1000).hide(0);   
                 setTimeout(function () {
                     location.reload();
                 }, 1000);
             },
             error: function() {
-                 $(".errorl").show(0).delay(2000).hide(0); 
+                 $(".errorl"+ item_id).show(0).delay(2000).hide(0); 
             }
         });
     });

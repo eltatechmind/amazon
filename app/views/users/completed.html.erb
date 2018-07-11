@@ -1,31 +1,32 @@
-
 <% provide(:title, "Completed Order") %>
-<h1>Completed Orders</h1>
+<div class="jumbotron">
+<h1 style= "color:black; font-weight: bold; text-decoration: underline">Completed Orders</h1>
 <% if !@order.nil? %>
   <% @order.each do |order| %>
     <% @oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1",order.id) %>
 
       <% if !@oi.nil? %>
-      <h2> Order ID:<%= order.id %> | Cancel Date: <%=order.created_at%></h2>
-        <ul>
+      <h2 style= "color:black; font-weight: bold; text-decoration: underline; margin-bottom: 10px; margin-top: 60px;"> Order ID:<%= order.id %> | Cancel Date: <%=order.created_at%></h2>
+        <ul class="list-group">
            <% totalprice = 0 %>
            <% @oi.each do |order_item| %>
-                <li>
-                  Item Name: <%= order_item.item.name %> <br>
-                  Description: <%= order_item.item.desc %> <br>
-                  Price: <%= order_item.item.price %> <br>
-                  Quantity: <%= order_item.quantity %> <br>
-                  Category: <%= order_item.item.category.name %> <br>
+                <li class="list-group-item beda">
+                  <span style= "color:DarkBlue; font-weight: bold;">Item Name: </span><span style= "color:Brown; font-weight: bold;"><%= order_item.item.name %></span> <br>
+                  <span style= "color:DarkBlue; font-weight: bold;">Description: </span><span style= "color:Brown; font-weight: bold;"><%= order_item.item.desc %></span> <br>
+                  <span style= "color:DarkBlue; font-weight: bold;">Price: </span><span class="badge badge-primary badge-pill" style="float:none">&dollar;<%= order_item.item.price %></span> <br>
+                  <span style= "color:DarkBlue; font-weight: bold;">Quantity: </span><span class="badge badge-primary badge-pill" style="float:none"><%= order_item.quantity %></span> <br>
+                  <span style= "color:DarkBlue; font-weight: bold;">Category: </span><span style= "color:Brown; font-weight: bold;"><%= order_item.item.category.name %></span> <br>
                     <% order_item.item.photos.each do |photo| %>
-                      <%= image_tag photo.image.url(:medium) %>
+                      <%= image_tag photo.image.url(:medium), :style => "border: 2px dashed black; margin-bottom: 4px; margin-top: 4px;" %>
                     <% end %>
                   <% totalprice = totalprice + (order_item.item.price*order_item.quantity) %>
                 </li>
            <% end %>
-           <p><strong> Order Total Price: <%=totalprice%></strong></p>
+           <p  class="beda" style="color: red; border: 2px dashed black; margin-top: 2px; font-weight: bold;">Order Total Price: <%=totalprice%></p>
         </ul> 
         <!--<button class="cancelorder btn btn-primary">Cancel Order</button>  -->
       <% end %>
 
   <% end %>
 <% end %> 
+</div>

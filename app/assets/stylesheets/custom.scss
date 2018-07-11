@@ -12,10 +12,11 @@ $gray-medium-light: #eaeaea;
 }
 
 /* universal */
+/* another color is lightblue */
 
 body {
   padding-top: 60px;
-  background-color: lightblue;
+  background-color: Goldenrod;
 }
 
 section {
@@ -144,7 +145,11 @@ aside {
 
 .gravatar {
   float: left;
+  padding-top: -50px;
   margin-right: 10px;
+  margin-bottom: 20px;
+  border-style: solid;
+  border-width: 5px;
 }
 
 .gravatar_edit {
@@ -193,3 +198,16 @@ input {
   margin-left: 0;
 }
 
+
+/*Logo Photo */
+
+.container .logog {
+      border: 2px solid white;
+      float: left;
+      margin-top: 10px;
+      margin-right: 10px;
+}
+
+.beda {
+  background-color: Goldenrod;
+}

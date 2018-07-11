@@ -1,45 +1,52 @@
 <% provide(:title, @user.name) %>
+<div class="jumbotron">
 <div class="row">
-  <p class="successr alert alert-success" style="display: none;"> Success! Address deleted. </p>
-  <p class="errorl alert alert-danger" style="display: none;"> Error! </p>
   <aside class="col-md-4">
+    <p style= "color:black; font-weight: bold; text-decoration: underline">My Info</p>
     <section class="user_info">
-      <h1>
+      <div style="margin-top: -10px;">
         <%= gravatar_for @user %>
-      </h1>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <p>Name: <%= @user.name %></p>
-      <p>Email: <%= @user.email %></p>
-      <p>Gender: <%= @user.gender %></p>
-      <p>Birthday: <%= @user.birthday %></p>
-      <p>Balance: &dollar;<%= @user.balance %></p>
+      </div>
+    </section>
+    <section class="user_info" style="margin-top:-14px;">  
+      <ul class="list-group">
+      <li class="list-group-item beda"><div style= "color:red; font-weight: bold;">Name:</div><div style= "color:blue; font-weight: bold;"> <%= @user.name %></div></li>
+      <li class="list-group-item beda"><div style= "color:red; font-weight: bold;">Email:</div><div style= "color:blue; font-weight: bold;"> <%= @user.email %></div></li>
+      <li class="list-group-item beda"><div style= "color:red; font-weight: bold;">Gender:</div><div style= "color:blue; font-weight: bold;"> <%= @user.gender %></div></li>
+      <li class="list-group-item beda"><div style= "color:red; font-weight: bold;">Birthday:</div><div style= "color:blue; font-weight: bold;"><%= @user.birthday %></div></li>
+      <li class="list-group-item beda"><div style= "color:red; font-weight: bold;">Balance:</div><div style= "color:blue; font-weight: bold;"> &dollar;<%= @user.balance %></div></li>
+      </ul>
     </section>
   </aside>
-  <p><strong> My Addresses </strong></p>
-  <aside class="col-md-4">
+  
+  <aside class="col-md-4" style="margin-top:3.5px;">
+      <p style= "color:black; font-weight: bold; text-decoration: underline">My Addresses</p>
       <% countr = 1 %>
       <% @address.each do |addr| %>
-        <p> address #<%=countr%> </p>
-        <ul>
-          <li>Address: <%=addr.address %> </li>
-          <li>State Or Province: <%=addr.state_or_province %> </li>
-          <li>City: <%=addr.city %> </li>
-          <li>Country: <%=addr.contry %> </li>
-          <div class="editaddrparent" id="<%= addr.id %>">
+        <div class= "list-group-item beda">
+        <p style= "color:gold; font-weight: bold;"> Address #<%=countr%> </p>
+        <ul class="list-group">
+          <li class="list-group-item beda"><span style= "color:green; font-weight: bold;">Address:</span><span style= "color:brown; font-weight: bold;"> <%=addr.address %> </span></li>
+          <li class="list-group-item beda"><span style= "color:green; font-weight: bold;">State Or Province:</span><span style= "color:brown; font-weight: bold;"> <%=addr.state_or_province %> </span></li>
+          <li class="list-group-item beda"><span style= "color:green; font-weight: bold;">City:</span><span style= "color:brown; font-weight: bold;"> <%=addr.city %> </span></li>
+          <li class="list-group-item beda"><span style= "color:green; font-weight: bold;">Country:</span><span style= "color:brown; font-weight: bold;"> <%=addr.contry %> </span></li>
+          <span class="editaddrparent" id="<%= addr.id %>">
               <button class="editaddr btn btn-primary">Edit Address</button>
-          </div>
-          <div class="removeaddrparent" id="<%= addr.id %>">
+          </span>
+          <span class="removeaddrparent" id="<%= addr.id %>" style= "float:right;">
               <button class="removeaddr btn btn-primary">Delete Address</button>
-          </div>
+          </span>
+            <p class="successr<%= addr.id %> alert alert-success" style="display: none;"> Success! Address deleted. </p>
+            <p class="errorl<%= addr.id %> alert alert-danger" style="display: none;"> Error! </p>
+          </div> 
         </ul>
+        <br>
         <% countr+=1 %>
       <% end %>
+    
     <a href="../createaddress">
-      <button class="addaddress btn btn-primary">Add New Address</button>
+      <button class="addaddress btn btn-primary"">Add New Address</button>
     </a>
   </aside>
+</div>
 </div>

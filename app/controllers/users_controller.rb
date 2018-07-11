@@ -3,6 +3,14 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [ :edit, :update, :show, :destroy]
 
 
+def home
+  user = current_user
+  if !user.nil?
+    redirect_to categories_path
+  end
+end
+
+
 # display user's Cancelled Orders
   def cancelled
     user = current_user

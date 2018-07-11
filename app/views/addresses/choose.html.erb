@@ -1,25 +1,32 @@
 <% provide(:title, 'Choose Address') %>
-<h1>Choose Address For Your Order</h1>
+<div class="jumbotron">
+<h2 style= "color:black; font-weight: bold; text-decoration: underline">Choose Address For Your Order</h2>
 
-<p class="successl alert alert-success" style="display: none;"> Success!, wait 5 Seconds being redirect to the order page! </p>
-<p class="errorl alert alert-danger" style="display: none;"> Error! </p>
+
 
 <% if !@address.empty? %>
-  <ul>
+  <ul class="list-group">
+    <% countr = 1 %>
       <% @address.each do |addr| %>
-          <li>
-            Address: <%= addr.address %> <br>
-            State Or Province: <%= addr.state_or_province %> <br>
-            City: <%= addr.city %> <br>
-            Country: <%= addr.contry %> <br>
+          <p style= "color:black; font-weight: bold; text-decoration: underline">Address #<%=countr%></p>
+          <li class="list-group-item beda">
+            <span style= "color:DarkBlue; font-weight: bold;">Address: </span><span style= "color:Brown; font-weight: bold;"><%= addr.address %></span> <br>
+            <span style= "color:DarkBlue; font-weight: bold;">State Or Province: </span><span style= "color:Brown; font-weight: bold;"><%= addr.state_or_province %></span> <br>
+            <span style= "color:DarkBlue; font-weight: bold;">City: </span><span style= "color:Brown; font-weight: bold;"><%= addr.city %></span> <br>
+            <span style= "color:DarkBlue; font-weight: bold;">Country: </span><span style= "color:Brown; font-weight: bold;"><%= addr.contry %></span> <br>
           <div class="orderaddressparent" id="<%= addr.id %>">
               <button class="orderaddress btn btn-primary">Choose This Address</button>
           </div>
+          <p class="successl<%= addr.id %> alert alert-success" style="display: none;"> Success!, wait 5 Seconds being redirect to the order page! </p>
+          <p class="errorl<%= addr.id %> alert alert-danger" style="display: none;"> Error! </p>
           </li> 
+          <br>
       <% end %>
+      <% countr += 1 %>
   </ul>
 
 <% else %>
   <h2> please add address first so that we can proceed your order </h2>
 <% end %>
+</div>
   

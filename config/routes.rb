@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  root 'users#index'
+  root 'users#home'
   post '/addcart', to: 'users#addcart'
   post '/removecart', to: 'users#removecart'
   post '/addorder', to: 'users#addorder'
