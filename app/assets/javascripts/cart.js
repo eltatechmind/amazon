@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 $(".successl"+item_id).show(0).delay(1000).hide(0);
             },
             error: function() {
-                $(".errorl"+item_id).show(0).delay(1000).hide(0);
+                $(".errorl"+item_id).show(0).delay(2000).hide(0);
             }
         });
     });

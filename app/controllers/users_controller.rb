@@ -117,8 +117,13 @@ end
     else
       oi = OrderItem.where("order_items.order_id = ? AND order_items.item_id = ? AND order_items.active = 1", order.id, item.id).first
       if !oi.nil?
-      oi[:quantity] += 1
-      oi.save
+        if oi.quantity < item.units
+          oi[:quantity] += 1
+          oi.save
+        else
+          render body: nil, status: :error
+          return
+        end
       else
       orderitem = order.order_items.create(order_id: order.id, item_id: item.id, quantity: 1, active: 1)
       end

@@ -16,11 +16,11 @@
               <button class="orderaddress btn btn-primary">Make Order Using This Address</button>
           </div>
           <p class="successl<%= addr.id %> alert alert-success" style="display: none;"> Success!,Order is created please wait 5 Seconds being redirect to the order page! </p>
-          <p class="errorl<%= addr.id %> alert alert-danger" style="display: none;"> Error! </p>
+          <p class="errorl<%= addr.id %> alert alert-danger" style="display: none;"> Error!, you got no enough balance or some of your products are not exist anymore </p>
           </li> 
           <br>
-      <% end %>
-      <% countr += 1 %>
+      <% countr += 1 %>    
+      <% end %>  
   </ul>
 
 <% else %>
