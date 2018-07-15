@@ -6,7 +6,7 @@ class AccountActivationsController < ApplicationController
       user.activate
       log_in user
       flash[:success] = "Account activated!, please add your address for delivering orders!"
-      redirect_to createaddress_url
+      redirect_to categories_url
     else
       flash[:danger] = "Invalid activation link"
       redirect_to root_url

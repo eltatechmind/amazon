@@ -4,6 +4,7 @@
     <%= link_to "Amazon", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Cart", cart_path %></li>
         <li><%= link_to "Products",   categories_path %></li>
         <% if logged_in? %>
           <li><%= link_to "Profile", current_user %></li>
@@ -16,7 +17,6 @@
               <li><%= link_to "Active Orders", order_path %></li>
               <li><%= link_to "Cancelled Orders", cancelled_path %></li>
               <li><%= link_to "Completed Orders", completed_path %></li>
-              <li><%= link_to "Cart", cart_path %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "Log out", logout_path, method: :delete %>
