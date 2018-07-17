@@ -43,9 +43,7 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
     if !@address.nil?
       @address.destroy
-      render body: nil, status: :ok
-    else
-      render body: nil, status: :error
+      render json: { success_message: "Success!, Address is deleted." }, status: :ok
     end
   end
 

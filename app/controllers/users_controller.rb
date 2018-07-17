@@ -3,12 +3,9 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [ :edit, :update, :show, :destroy]
 
 
-def home
-  user = current_user
-  if !user.nil?
-    redirect_to categories_path
+  def home
+    redirect_to categories_path if current_user.present?
   end
-end
 
 
 # display user's Cancelled Orders
@@ -32,9 +29,11 @@ end
     order = Order.find(params[:id])
     if !order.nil? && order.user_id == user.id
       oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1", order.id)
-      if !oi.nil?
+      if !oi.first.nil?
         totalprice = 0
         oi.each do |order_item|
+          order_item.active = 0
+          order_item.save
           item = Item.where("items.id = ?", order_item.item_id).first
           totalprice = totalprice + (item.price * order_item.quantity)
           item.units = item.units + order_item.quantity
@@ -44,15 +43,15 @@ end
         user.save
         order.state_id = state2.id
         order.save
-        render body: nil, status: :ok
+        render json: { success_message: "Success!, order is cancelled and your money refunded." }, status: :ok
         return
       else
-        render body: nil, status: :error
+        render json: { error_message: "Error!, This Order is Already Cancelled" }, status: :error
         return
       end
 
     else
-      render body: nil, status: :error
+      render json: { error_message: "Error!, order doesn't exist or you're not authorized to cancel it." }, status: :error
       return
     end
   end
@@ -63,8 +62,17 @@ end
     address = Address.find(params[:id])
     state = State.where(order_state: "Cart").first
     order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
-    if order.nil? || address.nil? || address.user_id != user.id
-      render body: nil, status: :error
+    if order.nil?
+      #render body: nil, status: :error
+      render json: { error_message: "Error!, Your cart is empty" }, status: :error
+      return
+    elsif address.nil?  
+      #render body: nil, status: :error
+      render json: { error_message: "Error!, Please add address first" }, status: :error
+      return
+    elsif  address.user_id != user.id     
+      #render body: nil, status: :error
+      render json: { error_message: "Error!, You're not authorized to create this order using this address" }, status: :error
       return
     else
       oi = OrderItem.where("order_items.order_id = ? AND order_items.active = 1", order.id)
@@ -73,12 +81,18 @@ end
         totalprice = totalprice + (order_item.item.price* order_item.quantity)
         item = Item.where("items.id = ?", order_item.item_id).first
         if order_item.quantity > item.units
-          render body: nil, status: :error
+          #render body: nil, status: :error
+          render json: { error_message: "Error!, Not enough " + item.name + " units exists for your order" }, status: :error
           return
         end
       end
-      if oi.nil? || totalprice > user.balance
-        render body: nil, status: :error
+      if oi.first.nil? 
+        #render body: nil, status: :error
+        render json: { error_message: "Error!, Your Cart Is Empty!" }, status: :error
+        return
+      elsif totalprice > user.balance
+        #render body: nil, status: :error
+        render json: { error_message: "Error!, You don't have enough balance for this order" }, status: :error
         return
       else
         oi.each do |order_item|
@@ -92,44 +106,41 @@ end
         order.state_id = state2.id
         order.address_id = address.id
         order.save
-        render body: nil, status: :ok
+        #render body: nil, status: :ok
+        render json: { success_message: "Success!, order is created and funds were paid from your balance, wait redirecting to your current active orders page" }, status: :ok
         return
       end  
     end
   end
 
-# add an item to a cart when press on a button using jquery and ajax request
+# (cleaned code) add an item to a cart when press on a button using jquery and ajax request
 
   def addcart
     user = current_user
-    state = State.where(order_state: "Cart").first
-    order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
+      
     item = Item.find(params[:item_id])
     if item.nil? || item.units == 0
-      render body: nil, status: :error
+      render json: { error_message: "Error!, This item is not available." }, status: :error
       return
     end
  
- 
-    if order.nil?
-      order = Order.create!(user_id: user.id, state_id: state.id)
-      order.order_items.create(order_id: order.id, item_id: item.id, quantity: 1, active: 1)
-    else
-      oi = OrderItem.where("order_items.order_id = ? AND order_items.item_id = ? AND order_items.active = 1", order.id, item.id).first
-      if !oi.nil?
-        if oi.quantity < item.units
-          oi[:quantity] += 1
-          oi.save
-        else
-          render body: nil, status: :error
-          return
-        end
-      else
-      orderitem = order.order_items.create(order_id: order.id, item_id: item.id, quantity: 1, active: 1)
-      end
+    state = State.find_by_order_state("Cart")
+    order = Order.find_by(user_id: user.id, state_id: state.id)
+    order ||= Order.create!(user_id: user.id, state_id: state.id)
+
+    oi = OrderItem.find_by(order_id: order.id, item_id: item.id, active: 1)
+    oi ||= order.order_items.create(item_id: item.id, quantity: 0, active: 1)
+
+    if oi.quantity < item.units
+      OrderItem.update(oi.id, quantity: oi.quantity + 1)
+      contr = oi.quantity + 1
+      render json: { success_message: "Success!, 1 " + item.name + " unit was added to your cart., You have " + contr.to_s + " of them now in your cart!"}, status: :ok
+      return
     end
-    render body: nil, status: :ok
-  end 
+
+    render json: { error_message: "Error!, Can't add more " + item.name + " units to your cart."}, status: :error
+    return
+  end
 
 # remove an item from a cart when pressing on a button using jquery and ajax request
 
@@ -139,17 +150,17 @@ end
     order = Order.where("orders.user_id = ? AND orders.state_id = ?", user.id, state.id).first
     item = Item.find(params[:item_id])
     if item.nil? || order.nil? 
-      render body: nil, status: :error
+      render json: { error_message: "Error!, item or order is not existing"}, status: :error
       return
     end
     oi = OrderItem.where("order_items.order_id = ? AND order_items.item_id = ? AND order_items.active = 1", order.id, item.id).first
     if oi.nil?
-      render body: nil, status: :error
+      render json: { error_message: "Error!, item is already removed."}, status: :error
       return
     end
     oi.active = 0
     oi.save
-    render body: nil, status: :ok
+    render json: { success_message: "Success!, all " + item.name + " units were removed from your cart." }, status: :ok
   end
  
 # display cart items on page cart 

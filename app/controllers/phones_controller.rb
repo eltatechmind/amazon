@@ -36,9 +36,7 @@ class PhonesController < ApplicationController
     @phone = Phone.find(params[:id])
     if !@phone.nil?
       @phone.destroy
-      render body: nil, status: :ok
-    else
-      render body: nil, status: :error
+      render json: { success_message: "Success!, Address is deleted." }, status: :ok
     end
   end
 

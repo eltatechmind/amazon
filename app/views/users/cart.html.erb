@@ -21,8 +21,8 @@
           <div class="removeitemparent" id="<%= order_item.item.id %>">
               <button class="removeitem btn btn-primary">Remove From Cart</button>
           </div>
-          <p class="successr<%= order_item.item.id %> alert alert-success" style="display: none;"> Success! Item Removed </p>
-          <p class="errorl<%= order_item.item.id %> alert alert-danger" style="display: none;"> Error! </p>
+          <p class="successr<%= order_item.item.id %> alert alert-success" style="display: none;"></p>
+          <p class="errorl<%= order_item.item.id %> alert alert-danger" style="display: none;"></p>
           <% totalprice = totalprice + (order_item.item.price* order_item.quantity) %> 
           </li> 
       <% end %>
@@ -32,12 +32,12 @@
       <div style= "text-align: center; margin-top: 4px;">
         <button class="gotoaddress btn btn-primary">Choose Address</button>
       </div>
-      <p class="successl alert alert-success" style="display: none;"> Redirecting to choosing address </p>
+      <p class="successl alert alert-success" style="display: none;"></p>
     <% else %>
       <div style= "text-align: center; margin-top: 4px;">
       <button class="addaddress btn btn-primary">Add Address First</button>
       </div>
-      <p class="successp alert alert-success" style="display: none;"> Redirecting to add address </p>
+      <p class="successp alert alert-success" style="display: none;"></p>
     <% end %>
     <% end %>
   </ul>

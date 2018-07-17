@@ -3,9 +3,9 @@ ruby "2.5.1"
 
 gem 'rails',        '5.1.4'
 gem 'devise', '~> 4.4', '>= 4.4.3'
-gem 'activeadmin', '~> 1.3'
-gem "paperclip", "~> 6.0.0"
-gem 'bootstrap-sass', '3.3.7'
+gem 'activeadmin', '~> 1.3'      #for admin dashboard
+gem "paperclip", "~> 6.0.0"      #for uploading photos
+gem 'bootstrap-sass', '3.3.7'   
 gem 'country_select'
 gem 'bcrypt',       '3.1.12'
 gem 'faker',          '1.7.3'
@@ -19,8 +19,8 @@ gem 'carrierwave', '~> 0.11.2'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
-  gem 'byebug',  '9.0.6', platform: :mri
-  gem 'awesome_print'
+  gem 'byebug',  '9.0.6', platform: :mri       #for checking and debugging the code
+  gem 'awesome_print'                          #for awesome printing the results in the rails console
 end
 
 group :development do
