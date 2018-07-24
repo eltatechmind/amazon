@@ -4,7 +4,9 @@
     <%= link_to "Amazon", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
+        <% if logged_in? %>
         <li><%= link_to "Cart", cart_path %></li>
+        <% end %>
         <li><%= link_to "Products",   categories_path %></li>
         <% if logged_in? %>
           <li><%= link_to "Profile", current_user %></li>

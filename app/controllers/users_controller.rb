@@ -32,8 +32,6 @@ class UsersController < ApplicationController
       if !oi.first.nil?
         totalprice = 0
         oi.each do |order_item|
-          order_item.active = 0
-          order_item.save
           item = Item.where("items.id = ?", order_item.item_id).first
           totalprice = totalprice + (item.price * order_item.quantity)
           item.units = item.units + order_item.quantity
