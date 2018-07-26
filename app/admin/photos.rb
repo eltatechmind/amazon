@@ -1,6 +1,6 @@
 ActiveAdmin.register Photo do
 
-permit_params :image, :item_id
+permit_params :id, :image, :item_id
   
   index do
     selectable_column
