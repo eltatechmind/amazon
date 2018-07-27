@@ -1,5 +1,6 @@
 class Photo < ApplicationRecord
-	has_attached_file :image, styles: { large: "300x300", medium: "100x100", thumb: "100x100" }
+	has_attached_file :image, :storage => :cloudinary,
+  :path => ':id/:style/:filename', styles: { large: "300x300", medium: "100x100", thumb: "100x100" }
 	validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
  	validates_attachment_presence :image
     validates_attachment_size :image, :less_than => 5.megabytes
