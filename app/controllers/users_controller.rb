@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [ :cart, :edit, :update, :show, :destroy, :order, :cart, :cancelled, :completed, :cancelorder, :removecart, :addcart, :addorder]
   before_action :correct_user,   only: [ :edit, :update, :show, :destroy]
 
- #the home page
+ #the home page for the website
   def home
     redirect_to categories_path if current_user.present?
   end
