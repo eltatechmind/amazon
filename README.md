@@ -1,24 +1,22 @@
-# README
+E-commerce V1: (my second Project in 2018)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+• E-commerce Website with A Full Registration, Authentication,Authorization System.
 
-Things you may want to cover:
+• A Categorized products page with prices, description, and photos.
 
-* Ruby version
+• Profile, cart, active orders, cancelled orders, completed orders pages per account.
 
-* System dependencies
+• An admin dashboard for controlling the whole database, add products, etc.
 
-* Configuration
+• MVC , Ruby On Rails, Javascript, Json, bootstrap, sass and SQLite.
 
-* Database creation
+• Many gems used like activeadmin for the admin dashboard, paperclips for uploading photes, and more.
 
-* Database initialization
+• Models, views, controllers, templates, partials, filters, validations, callbacks, all of these are used several times.
 
-* How to run the test suite
+• Including a well designed database with has_many/belongs_to and has_many :through associations, security actions.
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+Project on Heroku: https://lnkd.in/dvYPqg2
 
-* ...
+Project Schema: https://lnkd.in/dA9YyBn
