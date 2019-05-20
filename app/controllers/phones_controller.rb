@@ -42,8 +42,6 @@ class PhonesController < ApplicationController
 
 
 
-
-
   private
 
   def phone_params
