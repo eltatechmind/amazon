@@ -22,7 +22,6 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
   end
 
-
   def update
     @address = Address.find(params[:id])
     if @address.update_attributes(address_params)
@@ -50,8 +49,6 @@ class AddressesController < ApplicationController
 
 
   private
-
-  
 
   def address_params
       params.require(:address).permit(:user_id, :address, :city, :state_or_province, :contry)
